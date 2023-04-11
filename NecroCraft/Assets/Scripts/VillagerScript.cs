@@ -6,6 +6,9 @@ public class VillagerScript : MonoBehaviour
 {
     public GameObject objectToFollow;
     public float moveSpeed;
+    public float hp = 5;
+    public float dp = 1;
+    
     // Start is called before the first frame update
     void Start()
     {
