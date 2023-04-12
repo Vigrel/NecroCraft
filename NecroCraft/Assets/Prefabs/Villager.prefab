@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4881859185805756552}
   - component: {fileID: 1145426608640919250}
   - component: {fileID: 6729616252651428895}
-  - component: {fileID: 3629233976737558769}
   - component: {fileID: 4836814945063878281}
+  - component: {fileID: 3605517345207833681}
+  - component: {fileID: 6010221759571393041}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Villager
@@ -101,22 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToFollow: {fileID: 0}
   moveSpeed: 1
---- !u!58 &3629233976737558769
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7778332711123786812}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  hp: 5
+  dp: 1
 --- !u!50 &4836814945063878281
 Rigidbody2D:
   serializedVersion: 4
@@ -138,3 +125,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &3605517345207833681
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778332711123786812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!58 &6010221759571393041
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778332711123786812}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

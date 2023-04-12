@@ -2,20 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private GameObject villagersParent;
 
-    public float speed = 1;
-    public float hp = 10;
-    public float dp = 5;
+    public float speed = 2;
+    public float maxHp;
+	public RectTransform barImage;
 
+    private float currentHp;
 	private float movementX;
 	private float movementY;
+	private float HPbarMaxSize;
+
+
+    public void SetHealth()
+    {
+		float newSize = HPbarMaxSize*(currentHp/maxHp);
+		barImage.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
+    }
 
 	void Start ()
 	{
+		HPbarMaxSize = barImage.rect.width;
+		currentHp = maxHp;
 	}
 
     // Start is called before the first frame update
@@ -32,13 +44,13 @@ public class PlayerController : MonoBehaviour
 		movementX = v.x;
 		movementY = v.y;
 	}
-    void OnTriggerEnter2D(Collider2D other) 
+    void OnCollisionStay2D(Collision2D other) 
 	{
 		if(other.gameObject.tag == "Villager"){
-			hp -= 1;
-			other.transform.position = new Vector3(0f, 2f, 0f);
+			currentHp -= 1.0f;
+			SetHealth();
 		}
-		if(hp==0){
+		if(currentHp==0){
 			Time.timeScale = 0;
 		}
 	}
