@@ -1,23 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class VillagerScript : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    public float moveSpeed;
-    public float hp = 5;
-    public float dp = 1;
+    [SerializeField] public float moveSpeed = 1;
+    [SerializeField] public float hp = 5;
+    [SerializeField] public float damage = 1;
     
     private Transform _objectToFollow;
     private bool _isobjectToFollowNull = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (_isobjectToFollowNull) return;
         transform.position = Vector3.MoveTowards(transform.position, _objectToFollow.position,
