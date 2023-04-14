@@ -28,6 +28,6 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPosition = Random.insideUnitCircle.normalized * spawnRadius;
         spawnPosition += (Vector2)_player.position;
         GameObject enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
-        enemy.GetComponent<VillagerScript>().SetTarget(_player);
+        enemy.GetComponent<Enemy>().SetTarget(_player);
     }
 }

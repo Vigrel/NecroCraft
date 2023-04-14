@@ -411,11 +411,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Free Sprites 4x_14
+      name: Knight
       rect:
         serializedVersion: 2
         x: 152
-        y: 152
+        y: 151
         width: 64
         height: 64
       alignment: 0
@@ -552,7 +552,6 @@ TextureImporter:
       Free Sprites 4x_11: -1601448038
       Free Sprites 4x_12: -1541452835
       Free Sprites 4x_13: 967948258
-      Free Sprites 4x_14: 185676416
       Free Sprites 4x_15: 529748982
       Free Sprites 4x_16: -1919624670
       Free Sprites 4x_17: 1862624312
@@ -566,6 +565,7 @@ TextureImporter:
       Free Sprites 4x_7: -895179767
       Free Sprites 4x_8: 1628917157
       Free Sprites 4x_9: -1204172782
+      Knight: 185676416
       Villager: -1519882885
   spritePackingTag: 
   pSDRemoveMatte: 0

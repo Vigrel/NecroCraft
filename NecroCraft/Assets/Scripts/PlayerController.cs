@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 		float damageElapsedTime = Time.fixedTime - _lastDamageTime;
 		if (damageElapsedTime < damageTimer) return;
 		
-		if(other.gameObject.CompareTag("Villager")){
+		if(other.gameObject.CompareTag("MeleeEnemy")){
 			_currentHp -= 1.0f;
 			SetHealth();
 		}
