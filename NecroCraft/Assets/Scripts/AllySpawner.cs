@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class AllySpawner : MonoBehaviour
 {
     [SerializeField] public GameObject prefab;
-    [SerializeField] public float spawnRadius = 20f;
+    [SerializeField] public float spawnRadius = 5f;
     [SerializeField] public float spawnDelay = 1f;
     
     private Transform _player;
@@ -26,7 +26,7 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector2 spawnPosition = Random.insideUnitCircle.normalized * spawnRadius;
         spawnPosition += (Vector2)_player.position;
-        GameObject enemy = Instantiate(prefab, spawnPosition, Quaternion.identity);
-        enemy.GetComponent<Enemy>().SetTarget(_player);
+        GameObject ally = Instantiate(prefab, spawnPosition, Quaternion.identity);
     }
 }
+

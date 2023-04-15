@@ -123,6 +123,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &69975788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 69975789}
+  m_Layer: 0
+  m_Name: SummonAlly
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69975789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69975788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1491207961}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &475080633 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6571264583867543704, guid: ec3eb18220d46f742b958a1df4e4417f, type: 3}
@@ -175,7 +207,6 @@ MonoBehaviour:
   prefab: {fileID: 7778332711123786812, guid: a93b076508b6002bca9c37acf84e136b, type: 3}
   spawnRadius: 10
   spawnDelay: 1
-  spawnRate: 1
 --- !u!1 &799497049
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +246,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799497049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: defcd05ccbb043e48468452f4d147e73, type: 3}
   m_Name: 
@@ -223,7 +254,6 @@ MonoBehaviour:
   prefab: {fileID: 2350100857698222745, guid: f4308f80bc3984341a35e0d064c05662, type: 3}
   spawnRadius: 20
   spawnDelay: 1
-  spawnRate: 1
 --- !u!1 &887521566
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +453,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -500,6 +530,53 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1491207960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1491207961}
+  - component: {fileID: 1491207962}
+  m_Layer: 0
+  m_Name: Beetle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1491207961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491207960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 69975789}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491207962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491207960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edde5bf88c5933f4f8995dcba63ea874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 9030263077595645169, guid: f6feb4b0355cab94c8a9e1f702a61004, type: 3}
+  spawnRadius: 5
+  spawnDelay: 5
 --- !u!1 &1795884797
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +773,10 @@ PrefabInstance:
       propertyPath: barImage
       value: 
       objectReference: {fileID: 1795884798}
+    - target: {fileID: 6571264583867543709, guid: ec3eb18220d46f742b958a1df4e4417f, type: 3}
+      propertyPath: damageTimer
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 6571264583867543709, guid: ec3eb18220d46f742b958a1df4e4417f, type: 3}
       propertyPath: villagersParent
       value: 

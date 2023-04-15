@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Villager
   - MeleeEnemy
-  - Knight_1
+  - MeleeAlly
+  - Knight
+  - Beetle
   layers:
   - Default
   - TransparentFX

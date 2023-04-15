@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 2;
     public float maxHp;
     public RectTransform barImage;
-    public float damageTimer = 0.5f;
+    public float damageTimer = 0.1f;
 
     private float _currentHp;
     private float _movementX;
@@ -31,10 +31,6 @@ public class PlayerController : MonoBehaviour
         barImage.sizeDelta = new Vector2(newSize, barImage.sizeDelta.y);
         barImage.anchoredPosition = new Vector2(_startingHealthBarPosition.x - (_HPbarMaxSize - newSize)/2,
             _startingHealthBarPosition.y);
-        
-        
-        Debug.Log(newSize);
-        Debug.Log(_HPbarMaxSize);
     }
 
     void Start()
@@ -64,13 +60,16 @@ public class PlayerController : MonoBehaviour
         float damageElapsedTime = Time.fixedTime - _lastDamageTime;
         if (damageElapsedTime < damageTimer) return;
 
-        if (other.gameObject.CompareTag("MeleeEnemy"))
+        float damageToTake = TroopDamage.GetDamageForEnemy(other.gameObject.tag);
+
+        if (damageToTake != 0)
         {
-            _currentHp -= 1.0f;
+            _currentHp -= damageToTake;
+            _lastDamageTime = Time.fixedTime;
             SetHealth();
         }
-
-        if (_currentHp == 0)
+        
+        if (_currentHp <= 0)
         {
             Time.timeScale = 0;
         }
