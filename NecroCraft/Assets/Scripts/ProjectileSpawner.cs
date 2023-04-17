@@ -9,6 +9,8 @@ public class ProjectileSpawner : MonoBehaviour
     
     private Transform _player;
     private float _lastSpawnTime;
+    private Vector3 _lastPlayerPosition;
+    private Vector3 _direction = new Vector3(1,1,0);
 
     protected virtual void Start()
     {
@@ -17,7 +19,7 @@ public class ProjectileSpawner : MonoBehaviour
     }
 
     protected virtual void Update()
-    {
+    {   
         if (!(Time.time - _lastSpawnTime >= spawnDelay)) return;
         _lastSpawnTime = Time.time;
         Spawn();
@@ -25,6 +27,16 @@ public class ProjectileSpawner : MonoBehaviour
 
     protected virtual void Spawn()
     {
+        Vector3 currentPlayerPosition = _player.transform.position;
+        Vector3 stoped = currentPlayerPosition - _lastPlayerPosition;
+
+        if(stoped.x != 0 || stoped.y !=0){
+            _direction = currentPlayerPosition - _lastPlayerPosition;
+        }
+        _lastPlayerPosition = currentPlayerPosition;
+        Debug.Log(_direction);
+
         GameObject projectile = Instantiate(prefab, _player.position, Quaternion.identity);
+        projectile.GetComponent<Projectile>().SetDirection(_direction.normalized);
     }
 }
