@@ -62,10 +62,23 @@ public class Enemy : MonoBehaviour
             _lastDamageTime = Time.fixedTime;
         }
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player")) return;
+
+        float damageToTake = TroopDamage.GetDamageForWeapon(other.gameObject.tag);
+        if (damageToTake != 0)
+        {
+            _currentHp -= damageToTake;
+        }
+
         if (_currentHp <= 0)
         {
             Debug.Log("Destroying beetle");
             Destroy(gameObject, 0f);
         }
+        Destroy(other.gameObject, 0f);
     }
 }

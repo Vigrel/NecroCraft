@@ -12,6 +12,9 @@ public class TroopDamage : MonoBehaviour
     private static readonly Dictionary<string, float> AllyDamage = new Dictionary<string, float>() {
         {"Beetle", 1f}
     };
+    private static readonly Dictionary<string, float> WeaponDamage = new Dictionary<string, float>() {
+        {"Note", 1f}
+    };
     
     
     public static float GetDamageForEnemy(string enemyTag)
@@ -25,6 +28,13 @@ public class TroopDamage : MonoBehaviour
     {
         if (AllyDamage.ContainsKey(allyTag))
             return AllyDamage[allyTag];
+        
+        return 0f;
+    }
+    public static float GetDamageForWeapon(string wpnTag)
+    {
+        if (WeaponDamage.ContainsKey(wpnTag))
+            return WeaponDamage[wpnTag];
         
         return 0f;
     }
