@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player")) return;
+        if (!other.gameObject.CompareTag("Note")) return;
 
         float damageToTake = TroopDamage.GetDamageForWeapon(other.gameObject.tag);
         if (damageToTake != 0)
