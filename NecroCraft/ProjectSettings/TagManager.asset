@@ -9,6 +9,8 @@ TagManager:
   - MeleeAlly
   - Knight
   - Beetle
+  - Note
+  - Enviroment
   layers:
   - Default
   - TransparentFX
