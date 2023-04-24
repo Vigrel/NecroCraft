@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using PlayerScripts;
 
 namespace TroopScripts
@@ -53,12 +54,11 @@ namespace TroopScripts
                 _currentHp -= damageToTake;
                 _lastDamageTime = Time.fixedTime;
             }
-
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.gameObject.CompareTag("Note")) return;
+            if (!other.gameObject.CompareTag("Guitar")) return;
 
             float damageToTake = TroopDamage.GetDamageForWeapon(other.gameObject.tag);
             if (damageToTake != 0)
@@ -68,10 +68,24 @@ namespace TroopScripts
 
             if (_currentHp <= 0)
             {
-                Debug.Log("Destroying beetle");
                 Destroy(gameObject, 0f);
             }
+
             Destroy(other.gameObject, 0f);
+        }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            float damageToTake = TroopDamage.GetDamageForWeapon(other.gameObject.tag);
+            if (damageToTake != 0)
+            {
+                _currentHp -= damageToTake;
+            }
+
+            if (_currentHp <= 0)
+            {
+                Destroy(gameObject, 0f);
+            }
         }
     }
 }

@@ -1,38 +1,36 @@
-﻿using UnityEngine;
+using UnityEngine;
 using PlayerScripts;
+
 
 namespace Projectile
 {
     public class Note : MonoBehaviour
     {
-        [SerializeField] public float speed = 1f;
-         
-        private Camera _mainCamera;
-        private Vector3 _direction;
-
-        private void Start()
+        [SerializeField] public float speed = 2f;
+        [SerializeField] public float lifetime = 5f;
+        [SerializeField] public float cooldown = 10f;
+        [SerializeField] public short amount = 10;
+        
+        private ParticleSystem _particleSystem;
+        
+        void Start()
         {
-            _mainCamera = Camera.main;
-            _direction = PlayerController.Instance.LookingDirection;
+            _particleSystem = GetComponent<ParticleSystem>();
+            
+            var particleSystemMain = _particleSystem.main;
+            particleSystemMain.startLifetime = lifetime;
+            particleSystemMain.startSpeed = speed;
+            particleSystemMain.duration = cooldown;
+            
+            var particleSystemEmission = _particleSystem.emission;
+            particleSystemEmission.SetBurst(0, new ParticleSystem.Burst(0f, amount));
+            
+            _particleSystem.Play();
         }
 
-        private void Update()
+        void Update()
         {
-            if (!IsVisibleOnScreen())
-                Destroy(gameObject);
-
-            transform.Translate(_direction * (speed * Time.deltaTime));
-        }
-
-        private bool IsVisibleOnScreen()
-        {
-            // Get the object's position in screen coordinates
-            Vector3 screenPosition = _mainCamera.WorldToScreenPoint(transform.position);
-
-            // Check if the object is within the camera's view
-            return screenPosition.x > 0 && screenPosition.x < Screen.width &&
-                   screenPosition.y > 0 && screenPosition.y < Screen.height &&
-                   screenPosition.z > 0;
+            transform.position = PlayerController.Instance.Position;
         }
     }
 }

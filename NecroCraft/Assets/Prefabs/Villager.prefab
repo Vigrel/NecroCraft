@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4836814945063878281}
   - component: {fileID: 3605517345207833681}
   - component: {fileID: 6010221759571393041}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Villager
   m_TagString: Villager
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1519882885, guid: 426fcf6303cd2dd3686389dfd41507bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.2
-  hp: 5
-  damage: 1
+  maxHp: 5
   maxDistance: 30
+  damageTimer: 0.1
 --- !u!50 &4836814945063878281
 Rigidbody2D:
   serializedVersion: 4

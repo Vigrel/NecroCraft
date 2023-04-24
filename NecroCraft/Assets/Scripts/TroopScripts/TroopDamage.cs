@@ -14,30 +14,22 @@ namespace TroopScripts
             {"Beetle", 1f}
         };
         private static readonly Dictionary<string, float> WeaponDamage = new Dictionary<string, float>() {
-            {"Note", 1f}
+            {"Note", 0.5f},
+            {"Guitar", 1f}
         };
     
     
         public static float GetDamageForEnemy(string enemyTag)
         {
-            if (EnemyDamage.ContainsKey(enemyTag))
-                return EnemyDamage[enemyTag];
-        
-            return 0f;
+            return EnemyDamage.ContainsKey(enemyTag) ? EnemyDamage[enemyTag] : 0f;
         }
         public static float GetDamageForAlly(string allyTag)
         {
-            if (AllyDamage.ContainsKey(allyTag))
-                return AllyDamage[allyTag];
-        
-            return 0f;
+            return AllyDamage.ContainsKey(allyTag) ? AllyDamage[allyTag] : 0f;
         }
         public static float GetDamageForWeapon(string wpnTag)
         {
-            if (WeaponDamage.ContainsKey(wpnTag))
-                return WeaponDamage[wpnTag];
-        
-            return 0f;
+            return WeaponDamage.ContainsKey(wpnTag) ? WeaponDamage[wpnTag] : 0f;
         }
 
     }

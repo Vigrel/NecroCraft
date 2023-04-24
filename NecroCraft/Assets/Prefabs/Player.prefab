@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 799127400, guid: 18c806a1726c57e10aa81c551b7f40d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -146,10 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac91405d78192ed9adc71d2d73d15e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  villagersParent: {fileID: 0}
   speed: 2
   maxHp: 20
-  barImage: {fileID: 0}
   damageTimer: 0.1
 --- !u!50 &6571264583867543706
 Rigidbody2D:
