@@ -10,6 +10,7 @@ namespace TroopScripts
         [SerializeField] public float maxHp = 5;
         [SerializeField] public float maxDistance = 30f;
         [SerializeField] public float damageTimer = 0.1f;
+        [SerializeField] public GameObject xpPrefab;
 
         private float _currentHp;
         private float _lastDamageTime;
@@ -69,6 +70,9 @@ namespace TroopScripts
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
+                Instantiate(
+                    xpPrefab, gameObject.transform.position, Quaternion.identity
+                    );
             }
 
             Destroy(other.gameObject, 0f);
@@ -85,6 +89,9 @@ namespace TroopScripts
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
+                Instantiate(
+                    xpPrefab, gameObject.transform.position, Quaternion.identity
+                    );
             }
         }
     }

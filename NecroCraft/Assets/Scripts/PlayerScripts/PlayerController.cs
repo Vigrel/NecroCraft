@@ -13,10 +13,12 @@ namespace PlayerScripts
         public Vector3 MovementDirection { get; private set; }
         public Vector3 LookingDirection { get; private set; }
         public event Action<float> OnHealthChanged;
+        public event Action<float> OnXPChanged;
 
         [SerializeField] public float speed = 2;
         [SerializeField] public float maxHp;
         [SerializeField] public float damageTimer = 0.1f;
+        [SerializeField] public int xp = 0;
 
         private float _currentHp;
         private float _movementX;
@@ -60,7 +62,18 @@ namespace PlayerScripts
             _movementX = v.x;
             _movementY = v.y;
         }
-
+        
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.gameObject.CompareTag("Collectibles")) return;
+            xp++;
+            OnXPChanged?.Invoke(xp/10f);
+            Destroy(other.gameObject, 0f);
+            if(xp == 10){
+                xp = 0;
+            }
+        }
+        
         void OnCollisionStay2D(Collision2D other)
         {
             float damageElapsedTime = Time.fixedTime - _lastDamageTime;

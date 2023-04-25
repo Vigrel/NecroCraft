@@ -24,8 +24,8 @@ public class WorldScroll : MonoBehaviour
     {
         _playerTilePosition = playerTransform.position / tileSize;
         _playerTileGridPosition = CalculatePositionOnAxis(_playerTilePosition);
-        Debug.Log(_playerTileGridPosition);
-        Debug.Log(_playerTilePosition);
+        // Debug.Log(_playerTileGridPosition);
+        // Debug.Log(_playerTilePosition);
         UpdateTilesOnScreen();
     }
 
