@@ -12,13 +12,14 @@ namespace PlayerScripts
         public Vector3 Position { get; private set; }
         public Vector3 MovementDirection { get; private set; }
         public Vector3 LookingDirection { get; private set; }
+        
         public event Action<float> OnHealthChanged;
-        public event Action<float> OnXPChanged;
+        public event Action<float> OnXpChanged;
 
         [SerializeField] public float speed = 2;
         [SerializeField] public float maxHp;
         [SerializeField] public float damageTimer = 0.1f;
-        [SerializeField] public int xp = 0;
+        [SerializeField] public int xp = 1;
 
         private float _currentHp;
         private float _movementX;
@@ -67,7 +68,7 @@ namespace PlayerScripts
         {
             if (!other.gameObject.CompareTag("Collectibles")) return;
             xp++;
-            OnXPChanged?.Invoke(xp/10f);
+            OnXpChanged?.Invoke(xp/10f);
             Destroy(other.gameObject, 0f);
             if(xp == 10){
                 xp = 0;

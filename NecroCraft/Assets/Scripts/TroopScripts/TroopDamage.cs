@@ -13,7 +13,7 @@ namespace TroopScripts
         private static readonly Dictionary<string, float> AllyDamage = new Dictionary<string, float>() {
             {"Beetle", 1f}
         };
-        private static readonly Dictionary<string, float> WeaponDamage = new Dictionary<string, float>() {
+        private static Dictionary<string, float> _weaponDamage = new Dictionary<string, float>() {
             {"Note", 0.5f},
             {"Guitar", 1f}
         };
@@ -29,7 +29,17 @@ namespace TroopScripts
         }
         public static float GetDamageForWeapon(string wpnTag)
         {
-            return WeaponDamage.ContainsKey(wpnTag) ? WeaponDamage[wpnTag] : 0f;
+            return _weaponDamage.ContainsKey(wpnTag) ? _weaponDamage[wpnTag] : 0f;
+        }
+        
+        public static void UpgradeWeaponDamage(string wpnTag, float damageIncrease)
+        {
+            _weaponDamage[wpnTag] += damageIncrease;
+        }
+        
+        public static void UpgradeAllyDamage(string allyTag, float damageIncrease)
+        {
+            AllyDamage[allyTag] += damageIncrease;
         }
 
     }
