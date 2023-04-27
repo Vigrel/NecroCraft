@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8980505771370216234}
   - component: {fileID: 4836814945063878281}
   - component: {fileID: 3605517345207833681}
-  - component: {fileID: 6010221759571393041}
+  - component: {fileID: -3498740062589868090}
   m_Layer: 3
   m_Name: Villager
   m_TagString: Villager
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1519882885, guid: 426fcf6303cd2dd3686389dfd41507bb, type: 3}
+  m_Sprite: {fileID: -1447889548, guid: b0f92c9bfd7c78d3cba9d27b21f0b130, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,19 +142,23 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!58 &6010221759571393041
-CircleCollider2D:
+--- !u!95 &-3498740062589868090
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7778332711123786812}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28b749b8a247d347daaf36aed71c65d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

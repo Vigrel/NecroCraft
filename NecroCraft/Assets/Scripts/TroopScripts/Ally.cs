@@ -13,9 +13,11 @@ namespace TroopScripts
         private Vector3 _lastPlayerPosition;
         private float _currentHp;
         private float _lastDamageTime;
+        private Animator _animator;
 
         void Start()
         {
+             _animator = GetComponentInChildren<Animator>();
             _initialDistanceFromPlayer = PlayerController.Instance.Position - transform.position;
             _currentHp = maxHp;
         }

@@ -21,10 +21,12 @@ namespace PlayerScripts
         [SerializeField] public float damageTimer = 0.1f;
         [SerializeField] public int xp = 1;
 
+        private Animator _animator;
         private float _currentHp;
         private float _movementX;
         private float _movementY;
         private float _lastDamageTime;
+        private int _horizontal = 1; 
 
         private void Awake()
         {
@@ -43,8 +45,23 @@ namespace PlayerScripts
         {
             LookingDirection = new Vector3(1, 0, 0);
             _currentHp = maxHp;
+            _animator = GetComponentInChildren<Animator>();
         }
 
+        private void Update() {
+            switch (_movementX)
+            {
+                case > 0:
+                    _horizontal = 1;
+                    break;
+                case < 0:
+                    _horizontal = -1;
+                    break;
+            }
+
+            _animator.SetInteger("isMoving", Mathf.Abs(_movementX) > 0 || Mathf.Abs(_movementY) > 0 ? 1 : 0);
+            transform.localScale = new Vector3(_horizontal, 1, 1);
+        }
         // Start is called before the first frame update
         void FixedUpdate()
         {

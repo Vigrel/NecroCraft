@@ -12,12 +12,14 @@ namespace TroopScripts
         [SerializeField] public float damageTimer = 0.1f;
         [SerializeField] public GameObject xpPrefab;
 
+        private Animator _animator;
         private float _currentHp;
         private float _lastDamageTime;
 
         private void Start()
         {
             _currentHp = maxHp;
+            _animator = GetComponentInChildren<Animator>();
         }
 
         protected virtual void Update()
@@ -27,6 +29,14 @@ namespace TroopScripts
 
             DestroyWhenFarAway(selfPos, playerPos);
             MoveTowardsPlayer(selfPos, playerPos);
+
+            if (playerPos.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);}
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }   
         }
 
         private void MoveTowardsPlayer(Vector3 selfPos, Vector3 playerPos)
