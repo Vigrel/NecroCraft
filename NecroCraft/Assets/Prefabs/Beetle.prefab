@@ -103,6 +103,12 @@ MonoBehaviour:
   moveSpeed: 1.5
   maxHp: 15
   damageTimer: 0.1
+  circleRadius: 2
+  circleOffset: 1
+  detectionRadius: 3
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!50 &9030263077595645134
 Rigidbody2D:
   serializedVersion: 4

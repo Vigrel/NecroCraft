@@ -8,32 +8,56 @@ namespace TroopScripts
         [SerializeField] public float moveSpeed = 1f;
         [SerializeField] public float maxHp = 5f;
         [SerializeField] public float damageTimer = 0.1f;
+        [SerializeField] public float circleRadius = 2f;
+        [SerializeField] public float circleOffset = 1f;
+        [SerializeField] private float detectionRadius = 3f;
+        [SerializeField] private LayerMask enemyLayerMask;
 
-        private Vector3 _initialDistanceFromPlayer;
-        private Vector3 _lastPlayerPosition;
+        private Vector3 _initialPositionFromPlayer;
         private float _currentHp;
         private float _lastDamageTime;
         private Animator _animator;
+        private float _randAngle;
+        private Transform _targetEnemy;
 
         void Start()
         {
-             _animator = GetComponentInChildren<Animator>();
-            _initialDistanceFromPlayer = PlayerController.Instance.Position - transform.position;
+            _randAngle = Random.Range(0f, 1f);
+            _initialPositionFromPlayer = PlayerController.Instance.Position - transform.position;
             _currentHp = maxHp;
+            _animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
         {
             Vector3 currentPlayerPosition = PlayerController.Instance.Position;
+            float angle = Time.time * moveSpeed * _randAngle;
+            Vector3 offset = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * circleRadius;
 
-            Vector3 targetPosition = currentPlayerPosition - _initialDistanceFromPlayer;
+            Vector3 targetPosition;
+            if (_targetEnemy != null)
+            {
+                // Move towards the closest enemy if it's too close
+                float distanceToEnemy = Vector3.Distance(transform.position, _targetEnemy.position);
+                if (distanceToEnemy < detectionRadius)
+                {
+                    targetPosition = _targetEnemy.position;
+                }
+                else
+                {
+                    targetPosition = currentPlayerPosition - _initialPositionFromPlayer + offset + Vector3.up * circleOffset;
+                }
+            }
+            else
+            {
+                targetPosition = currentPlayerPosition - _initialPositionFromPlayer + offset + Vector3.up * circleOffset;
+            }
+
             transform.position = Vector3.MoveTowards(
                 transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            
             var playerHorizontalDirection = PlayerController.Instance.MovementDirection.x;
             var currLocalScale = transform.localScale;
-            
             switch (playerHorizontalDirection)
             {
                 case > 0 when currLocalScale.x < 0:
@@ -44,6 +68,33 @@ namespace TroopScripts
                     break;
             }
 
+            // Check for nearby enemies
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRadius, enemyLayerMask);
+            if (colliders.Length > 0)
+            {
+                // Find the closest enemy
+                float closestDistance = Mathf.Infinity;
+                Transform closestEnemy = null;
+
+                foreach (Collider2D collider in colliders)
+                {
+                    float distance = Vector3.Distance(transform.position, collider.transform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = collider.transform;
+                    }
+                }
+
+                // Set the target enemy
+                _targetEnemy = closestEnemy;
+            }
+            else
+            {
+                // Reset the target enemy
+                _targetEnemy = null;
+            }
         }
 
         void OnCollisionStay2D(Collision2D other)
