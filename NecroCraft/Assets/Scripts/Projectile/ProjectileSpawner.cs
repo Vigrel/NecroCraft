@@ -28,5 +28,10 @@ namespace Projectile
                 prefab, PlayerController.Instance.Position, Quaternion.identity
                 );
         }
+        
+        public void UpdateSpawnDelay(float delayReductionPct)
+        {
+            spawnDelay *= (1f - delayReductionPct);
+        }
     }
 }

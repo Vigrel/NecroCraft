@@ -29,6 +29,11 @@ namespace TroopScripts
             spawnPosition += (Vector2) PlayerController.Instance.Position;
             GameObject ally = Instantiate(prefab, spawnPosition, Quaternion.identity);
         }
+        
+        public void UpdateSpawnDelay(float delayReductionPct)
+        {
+            spawnDelay *= (1f - delayReductionPct);
+        }
     }
 }
 
