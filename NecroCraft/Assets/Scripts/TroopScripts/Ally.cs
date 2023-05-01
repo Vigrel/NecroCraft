@@ -34,30 +34,22 @@ namespace TroopScripts
             float angle = Time.time * moveSpeed * _randAngle;
             Vector3 offset = new Vector3(Mathf.Sin(angle), 0, Mathf.Cos(angle)) * circleRadius;
 
-            Vector3 targetPosition;
             if (_targetEnemy != null)
             {
-                // Move towards the closest enemy if it's too close
-                float distanceToEnemy = Vector3.Distance(transform.position, _targetEnemy.position);
-                if (distanceToEnemy < detectionRadius)
-                {
-                    targetPosition = _targetEnemy.position;
-                }
-                else
-                {
-                    targetPosition = currentPlayerPosition - _initialPositionFromPlayer + offset + Vector3.up * circleOffset;
-                }
+                Vector3 targetPosition = _targetEnemy.position;
+                transform.position = Vector3.MoveTowards(
+                    transform.position, targetPosition, moveSpeed * Time.deltaTime);
             }
-            else
-            {
-                targetPosition = currentPlayerPosition - _initialPositionFromPlayer + offset + Vector3.up * circleOffset;
+            else{
+                Vector3 targetPosition = currentPlayerPosition - _initialPositionFromPlayer + offset + Vector3.up * circleOffset ;
+                transform.position = Vector3.MoveTowards(
+                    transform.position, targetPosition, moveSpeed * Time.deltaTime);
             }
-
-            transform.position = Vector3.MoveTowards(
-                transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            
 
             var playerHorizontalDirection = PlayerController.Instance.MovementDirection.x;
             var currLocalScale = transform.localScale;
+            
             switch (playerHorizontalDirection)
             {
                 case > 0 when currLocalScale.x < 0:
