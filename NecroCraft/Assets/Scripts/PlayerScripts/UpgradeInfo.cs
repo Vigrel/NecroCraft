@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using TroopScripts;
 using Projectile;
+using PlayerScripts;
 
 namespace PlayerScripts
 {
@@ -21,7 +22,7 @@ namespace PlayerScripts
         private static ProjectileSpawner _guitarScript;
         private static AllySpawner _beetleScript;
 
-        private const int MaxWeapons = 4;
+        private const int MaxWeapons = 2;
         private const int MaxUpgrades = 6;
 
         private static int _weaponCount = 0;
@@ -47,15 +48,15 @@ namespace PlayerScripts
             {
                 { "Guitar", _guitarController },
                 { "Note", _noteController },
-                { "Beetle", _beetleController}
+                { "Beetle", _beetleController }
             };
 
             // Initialize WeaponUpgrades dictionary
             _weaponUpgrades = new Dictionary<string, int>()
             {
-                { "Guitar", 1},
+                { "Guitar", 1 },
                 { "Note", 0 },
-                { "Beetle", 0},
+                { "Beetle", 0 },
             };
 
             // Initialize UpgradeActions dictionary
@@ -105,6 +106,18 @@ namespace PlayerScripts
                     new UpgradeKey("Beetle", "10% cooldown reduction"),
                     () => _beetleScript.UpdateSpawnDelay(0.1f)
                 },
+                {
+                    new UpgradeKey("Health", "Recover 10% lost health"),
+                    () => PlayerController.Instance.RecoverHealth(0.1f)
+                },
+                {
+                    new UpgradeKey("Health", "Increase max health by 5%"),
+                    () => PlayerController.Instance.UpgradeMaxHealth()
+                },
+                {
+                    new UpgradeKey("Speed", "Increase speed by 5%"),
+                    () => PlayerController.Instance.UpgradeSpeed()
+                }
             };
         }
 
@@ -146,13 +159,25 @@ namespace PlayerScripts
             _weaponCount++;
         }
 
+        private static List<UpgradeKey> AddFixedUpgrades()
+        {
+            List<UpgradeKey> fixedUpgrades = new List<UpgradeKey>
+            {
+                new UpgradeKey("Health", "Recover 10% lost health"),
+                new UpgradeKey("Health", "Increase max health by 5%"),
+                new UpgradeKey("Speed", "Increase speed by 5%")
+            };
+            return fixedUpgrades;
+        }
+
         public static UpgradeKey[] GetUpgrades()
         {
-            List<UpgradeKey> possibleUpgrades = new List<UpgradeKey>();
+            List<UpgradeKey> possibleUpgrades = AddFixedUpgrades();
             if (_weaponCount < MaxWeapons)
             {
                 foreach (UpgradeKey upgrade in _upgradeActions.Keys)
                 {
+                    if (upgrade.WeaponName is "Health" or "Speed") continue;
                     switch (_weaponUpgrades[upgrade.WeaponName])
                     {
                         case 0 when upgrade.UpgradeDescription == "Get new weapon":
@@ -169,6 +194,7 @@ namespace PlayerScripts
             foreach (UpgradeKey upgrade in _upgradeActions.Keys.Where(upgrade =>
                          upgrade.UpgradeDescription != "Get new weapon"))
             {
+                if (upgrade.WeaponName is "Health" or "Speed") continue;
                 switch (_weaponUpgrades[upgrade.WeaponName])
                 {
                     case MaxUpgrades:
@@ -185,20 +211,20 @@ namespace PlayerScripts
 
         public static void UpgradeWeapon(UpgradeKey weapon)
         {
-            if (_weaponUpgrades[weapon.WeaponName] >= MaxUpgrades)
+            if (weapon.WeaponName is "Health" or "Speed")
             {
-                throw new Exception("Error: Weapon already upgraded to max!");
+                _upgradeActions[weapon]();
+                return;
             }
+
+            if (_weaponUpgrades[weapon.WeaponName] >= MaxUpgrades)
+                throw new Exception("Error: Weapon already upgraded to max!");
 
             if (_weaponUpgrades[weapon.WeaponName] == 0 && _weaponCount == MaxWeapons)
-            {
                 throw new Exception("Error: Max weapons reached!");
-            }
 
             if (_weaponUpgrades[weapon.WeaponName] == 0 && weapon.UpgradeDescription != "Get new weapon")
-            {
                 throw new Exception("Error: Weapon not upgraded to level 1!");
-            }
 
             if (weapon.UpgradeDescription == "Get new weapon")
             {

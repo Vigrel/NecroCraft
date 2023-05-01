@@ -24,15 +24,17 @@ namespace PlayerScripts
                 .OrderBy(user => rnd.Next())
                 .ToArray();
 
+            Array.ForEach(upgradeList, upgrade => Debug.Log(upgrade.GetFullDescription()));
+
             return upgradeList.Take(upgradeCount).ToArray();
         }
 
 
         private void OnEnable()
         {
+            UpgradeKey[] currentUpgrades = GetRandomUpgrades(buttonLabels.Length);
             _availableUpgrades = new UpgradeKey[buttonLabels.Length];
             
-            UpgradeKey[] currentUpgrades = GetRandomUpgrades(buttonLabels.Length);
             for (int i = 0; i < buttonLabels.Length; i++)
             {
                 buttonLabels[i].text = currentUpgrades[i].GetFullDescription();
