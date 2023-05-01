@@ -19,6 +19,8 @@ namespace TroopScripts
         protected virtual void Update()
         {
             if (!(Time.time - _lastSpawnTime >= spawnDelay)) return;
+            if (TroopDamage.AllyCount >= TroopDamage.MaxAllyCount) return;
+            
             _lastSpawnTime = Time.time;
             Spawn();
         }
@@ -28,6 +30,7 @@ namespace TroopScripts
             Vector2 spawnPosition = Random.insideUnitCircle.normalized * spawnRadius;
             spawnPosition += (Vector2) PlayerController.Instance.Position;
             GameObject ally = Instantiate(prefab, spawnPosition, Quaternion.identity);
+            TroopDamage.IncrementAllyCount();
         }
         
         public void UpdateSpawnDelay(float delayReductionPct)

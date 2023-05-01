@@ -8,7 +8,7 @@ namespace TroopScripts
     {
         [SerializeField] public float moveSpeed = 1;
         [SerializeField] public float maxHp = 5;
-        [SerializeField] public float maxDistance = 30f;
+        [SerializeField] public float maxDistance = 25f;
         [SerializeField] public float damageTimer = 0.1f;
         [SerializeField] public GameObject xpPrefab;
 
@@ -27,7 +27,7 @@ namespace TroopScripts
             var playerPos = PlayerController.Instance.Position;
             var selfPos = transform.position;
 
-            DestroyWhenFarAway(selfPos, playerPos);
+            selfPos = RepositionWhenFarAway(selfPos, playerPos);
             MoveTowardsPlayer(selfPos, playerPos);
 
             if (playerPos.x > transform.position.x)
@@ -45,10 +45,17 @@ namespace TroopScripts
                 selfPos, playerPos, moveSpeed * Time.deltaTime);
         }
 
-        private void DestroyWhenFarAway(Vector3 selfPos, Vector3 playerPos)
+        private Vector3 RepositionWhenFarAway(Vector3 selfPos, Vector3 playerPos)
         {
             var distanceToPlayer = Vector3.Distance(selfPos, playerPos);
-            if (distanceToPlayer > maxDistance) Destroy(gameObject, 0f);
+            if (distanceToPlayer > maxDistance)
+            {
+                var newPos = playerPos + PlayerController.Instance.MovementDirection * maxDistance/1.2f;
+                transform.position = newPos;
+                return newPos;
+            }
+
+            return selfPos;
         }
 
         void OnCollisionStay2D(Collision2D other)
@@ -80,6 +87,7 @@ namespace TroopScripts
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
+                TroopDamage.DecrementEnemyCount();
                 Instantiate(
                     xpPrefab, gameObject.transform.position, Quaternion.identity
                     );
@@ -99,6 +107,7 @@ namespace TroopScripts
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
+                TroopDamage.DecrementEnemyCount();
                 Instantiate(
                     xpPrefab, gameObject.transform.position, Quaternion.identity
                     );

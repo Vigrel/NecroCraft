@@ -105,6 +105,7 @@ namespace TroopScripts
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
+                TroopDamage.DecrementAllyCount();
             }
         }
     }
