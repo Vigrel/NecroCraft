@@ -26,7 +26,10 @@ namespace PlayerScripts
         private float _movementX;
         private float _movementY;
         private float _lastDamageTime;
-        private int _horizontal = 1; 
+        private int _horizontal = 1;
+        
+        private float _speedUpgrade;
+        private float _maxHpUpgrade;
 
         private void Awake()
         {
@@ -46,6 +49,9 @@ namespace PlayerScripts
             LookingDirection = new Vector3(1, 0, 0);
             _currentHp = maxHp;
             _animator = GetComponentInChildren<Animator>();
+
+            _maxHpUpgrade = maxHp * 0.05f;
+            _speedUpgrade = speed * 0.05f;
         }
 
         private void Update() {
@@ -110,6 +116,26 @@ namespace PlayerScripts
             {
                 Time.timeScale = 0;
             }
+        }
+        
+        public void RecoverHealth(float amountPct)
+        {
+            float lostHp = maxHp - _currentHp;
+            _currentHp = Mathf.Min(_currentHp + lostHp * amountPct, maxHp);
+            OnHealthChanged?.Invoke(_currentHp/maxHp);
+        }
+
+        public void UpgradeMaxHealth()
+        {
+            float currentHpPct = _currentHp / maxHp;
+            maxHp += _maxHpUpgrade;
+            _currentHp = Mathf.Min(currentHpPct * maxHp, maxHp);
+            OnHealthChanged?.Invoke(_currentHp/maxHp);
+        }
+
+        public void UpgradeSpeed()
+        {
+            speed += _speedUpgrade;
         }
     }
 }
