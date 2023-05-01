@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bf455f55fd41f5b87c3db97404f0d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.2
-  maxHp: 5
+  moveSpeed: 1.5
+  maxHp: 3
   maxDistance: 30
   damageTimer: 0.1
   xpPrefab: {fileID: 4307425447527077993, guid: 14f13262797826a148019b585cb49997, type: 3}

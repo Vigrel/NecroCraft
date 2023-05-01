@@ -13,6 +13,8 @@ TagManager:
   - Enviroment
   - Guitar
   - Collectibles
+  - Peasant
+  - Soldier
   layers:
   - Default
   - TransparentFX
