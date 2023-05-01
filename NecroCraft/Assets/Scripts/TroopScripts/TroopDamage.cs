@@ -5,6 +5,16 @@ namespace TroopScripts
 {
     public class TroopDamage : MonoBehaviour
     {
+        public static int MaxEnemyCount { get; } = 50;
+        public static int EnemyCount { get; private set; } = 0;
+        public static void IncrementEnemyCount() => EnemyCount++;
+        public static void DecrementEnemyCount() => EnemyCount--;
+        
+        public static int MaxAllyCount { get; } = 5;
+        public static int AllyCount { get; private set; } = 0;
+        public static void IncrementAllyCount() => AllyCount++;
+        public static void DecrementAllyCount() => AllyCount--;
+
         private static readonly Dictionary<string, float> EnemyDamage = new Dictionary<string, float>() {
             {"Villager", 1f},
             {"Knight", 2f}
@@ -17,8 +27,7 @@ namespace TroopScripts
             {"Note", 0.5f},
             {"Guitar", 1f}
         };
-    
-    
+        
         public static float GetDamageForEnemy(string enemyTag)
         {
             return EnemyDamage.ContainsKey(enemyTag) ? EnemyDamage[enemyTag] : 0f;
@@ -41,6 +50,6 @@ namespace TroopScripts
         {
             AllyDamage[allyTag] += damageIncrease;
         }
-
+        
     }
 }
