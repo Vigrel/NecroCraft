@@ -111,13 +111,13 @@ namespace PlayerScripts
                 _lastDamageTime = Time.fixedTime;
                 OnHealthChanged?.Invoke(_currentHp/maxHp);
             }
-
-            if (_currentHp <= 0)
-            {
-                Time.timeScale = 0;
-            }
         }
         
+        public float GetCurrentHp()
+        {
+            return _currentHp;
+        }
+
         public void RecoverHealth(float amountPct)
         {
             float lostHp = maxHp - _currentHp;

@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PlayerScripts;
 
 public class WorldScroll : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
     [SerializeField] int terrainTileHorizontalCount;
     [SerializeField] int terrainTileVerticalCount;
     [SerializeField] float tileSize;
@@ -22,10 +22,8 @@ public class WorldScroll : MonoBehaviour
 
     private void Update()
     {
-        _playerTilePosition = playerTransform.position / tileSize;
+        _playerTilePosition = PlayerController.Instance.Position / tileSize;
         _playerTileGridPosition = CalculatePositionOnAxis(_playerTilePosition);
-        // Debug.Log(_playerTileGridPosition);
-        // Debug.Log(_playerTilePosition);
         UpdateTilesOnScreen();
     }
 

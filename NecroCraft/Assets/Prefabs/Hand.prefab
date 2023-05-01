@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -3958911467733761622}
   - component: {fileID: 3011906886762419747}
   - component: {fileID: 4409031853760636006}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1475466318, guid: 5a1fc37dcc8f4478484ba6a9ff333b3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef35c9f85bbf9243b3781e95fcdd75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 2
   maxHp: 5
   damageTimer: 0.1
   circleRadius: 2

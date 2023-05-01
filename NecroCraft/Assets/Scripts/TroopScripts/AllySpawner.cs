@@ -19,9 +19,8 @@ namespace TroopScripts
         protected virtual void Update()
         {
             if (!(Time.time - _lastSpawnTime >= spawnDelay)) return;
-            if (TroopDamage.AllyCount >= TroopDamage.MaxAllyCount) return;
-            
             _lastSpawnTime = Time.time;
+            if (TroopDamage.AllyCount >= TroopDamage.MaxAllyCount) return;
             Spawn();
         }
 

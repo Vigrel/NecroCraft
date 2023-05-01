@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef35c9f85bbf9243b3781e95fcdd75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
-  maxHp: 5
+  moveSpeed: 2
+  maxHp: 25
   damageTimer: 0.1
   circleRadius: 2
   circleOffset: 1
