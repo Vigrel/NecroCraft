@@ -12,17 +12,23 @@ namespace PlayerScripts
     {
         [SerializeField] private GameObject guitarController;
         [SerializeField] private GameObject noteController;
-        [SerializeField] private GameObject beetleController;
+        [SerializeField] private GameObject handController;
+        [SerializeField] private GameObject zombieController;
+        [SerializeField] private GameObject mummyController;
 
         private static GameObject _guitarController;
         private static GameObject _noteController;
-        private static GameObject _beetleController;
+        private static GameObject _handController;
+        private static GameObject _zombieController;
+        private static GameObject _mummyController;
 
         private static Note _noteScript;
         private static ProjectileSpawner _guitarScript;
-        private static AllySpawner _beetleScript;
+        private static AllySpawner _handScript;
+        private static AllySpawner _zombieScript;
+        private static AllySpawner _mummyScript;
 
-        private const int MaxWeapons = 2;
+        private const int MaxWeapons = 3;
         private const int MaxUpgrades = 6;
 
         private static int _weaponCount = 0;
@@ -41,14 +47,18 @@ namespace PlayerScripts
             // Initialize Controller GameObjects
             _guitarController = guitarController;
             _noteController = noteController;
-            _beetleController = beetleController;
+            _handController = handController;
+            _zombieController = zombieController;
+            _mummyController = mummyController;
 
             // Initialize WeaponControllers dictionary
             _weaponControllers = new Dictionary<string, GameObject>()
             {
                 { "Guitar", _guitarController },
                 { "Note", _noteController },
-                { "Beetle", _beetleController }
+                { "Hand", _handController },
+                { "Zombie", _zombieController },
+                { "Mummy", _mummyController },
             };
 
             // Initialize WeaponUpgrades dictionary
@@ -56,7 +66,9 @@ namespace PlayerScripts
             {
                 { "Guitar", 1 },
                 { "Note", 0 },
-                { "Beetle", 0 },
+                { "Hand", 0 },
+                { "Zombie", 0 },
+                { "Mummy", 0 },
             };
 
             // Initialize UpgradeActions dictionary
@@ -95,16 +107,40 @@ namespace PlayerScripts
                     () => _noteScript.UpdateLifetime(0.5f)
                 },
                 {
-                    new UpgradeKey("Beetle", "Get new weapon"),
-                    () => GetNewWeapon("Beetle")
+                    new UpgradeKey("Hand", "Get new weapon"),
+                    () => GetNewWeapon("Hand")
                 },
                 {
-                    new UpgradeKey("Beetle", "+1 damage"),
-                    () => TroopDamage.UpgradeAllyDamage("Beetle", 1)
+                    new UpgradeKey("Hand", "+1 damage"),
+                    () => TroopDamage.UpgradeAllyDamage("Hand", 1)
                 },
                 {
-                    new UpgradeKey("Beetle", "10% cooldown reduction"),
-                    () => _beetleScript.UpdateSpawnDelay(0.1f)
+                    new UpgradeKey("Hand", "10% cooldown reduction"),
+                    () => _handScript.UpdateSpawnDelay(0.1f)
+                },
+                {
+                    new UpgradeKey("Zombie", "Get new weapon"),
+                    () => GetNewWeapon("Zombie")
+                },
+                {
+                    new UpgradeKey("Zombie", "+1 damage"),
+                    () => TroopDamage.UpgradeAllyDamage("Zombie", 1)
+                },
+                {
+                    new UpgradeKey("Zombie", "10% cooldown reduction"),
+                    () => _zombieScript.UpdateSpawnDelay(0.1f)
+                },
+                {
+                    new UpgradeKey("Mummy", "Get new weapon"),
+                    () => GetNewWeapon("Mummy")
+                },
+                {
+                    new UpgradeKey("Mummy", "+1 damage"),
+                    () => TroopDamage.UpgradeAllyDamage("Mummy", 1)
+                },
+                {
+                    new UpgradeKey("Mummy", "10% cooldown reduction"),
+                    () => _mummyScript.UpdateSpawnDelay(0.1f)
                 },
                 {
                     new UpgradeKey("Health", "Recover 10% lost health"),
@@ -139,7 +175,9 @@ namespace PlayerScripts
 
             _guitarScript = _guitarController.GetComponent<ProjectileSpawner>();
             _noteScript = _noteController.GetComponent<Note>();
-            _beetleScript = _beetleController.GetComponent<AllySpawner>();
+            _handScript = _handController.GetComponent<AllySpawner>();
+            _zombieScript = _zombieController.GetComponent<AllySpawner>();
+            _mummyScript = _mummyController.GetComponent<AllySpawner>();
         }
 
         private static void GetNewWeapon(string weaponName)

@@ -32,11 +32,12 @@ namespace TroopScripts
 
             if (playerPos.x > transform.position.x)
             {
-                transform.localScale = new Vector3(1, 1, 1);}
+                transform.localScale = new Vector3(1, 1, 1);
+            }
             else
             {
                 transform.localScale = new Vector3(-1, 1, 1);
-            }   
+            }
         }
 
         private void MoveTowardsPlayer(Vector3 selfPos, Vector3 playerPos)
@@ -50,7 +51,7 @@ namespace TroopScripts
             var distanceToPlayer = Vector3.Distance(selfPos, playerPos);
             if (distanceToPlayer > maxDistance)
             {
-                var newPos = playerPos + PlayerController.Instance.MovementDirection * maxDistance/1.2f;
+                var newPos = playerPos + PlayerController.Instance.MovementDirection * maxDistance / 1.2f;
                 transform.position = newPos;
                 return newPos;
             }
@@ -72,6 +73,15 @@ namespace TroopScripts
                 _currentHp -= damageToTake;
                 _lastDamageTime = Time.fixedTime;
             }
+
+            if (_currentHp <= 0)
+            {
+                Destroy(gameObject, 0f);
+                TroopDamage.DecrementEnemyCount();
+                Instantiate(
+                    xpPrefab, gameObject.transform.position, Quaternion.identity
+                );
+            }
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -83,14 +93,14 @@ namespace TroopScripts
             {
                 _currentHp -= damageToTake;
             }
-            
+
             if (_currentHp <= 0)
             {
                 Destroy(gameObject, 0f);
                 TroopDamage.DecrementEnemyCount();
                 Instantiate(
                     xpPrefab, gameObject.transform.position, Quaternion.identity
-                    );
+                );
             }
 
             Destroy(other.gameObject, 0f);
@@ -110,7 +120,7 @@ namespace TroopScripts
                 TroopDamage.DecrementEnemyCount();
                 Instantiate(
                     xpPrefab, gameObject.transform.position, Quaternion.identity
-                    );
+                );
             }
         }
     }

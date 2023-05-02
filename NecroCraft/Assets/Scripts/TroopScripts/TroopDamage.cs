@@ -10,22 +10,26 @@ namespace TroopScripts
         public static void IncrementEnemyCount() => EnemyCount++;
         public static void DecrementEnemyCount() => EnemyCount--;
         
-        public static int MaxAllyCount { get; } = 5;
+        public static int MaxAllyCount { get; } = 10;
         public static int AllyCount { get; private set; } = 0;
         public static void IncrementAllyCount() => AllyCount++;
         public static void DecrementAllyCount() => AllyCount--;
 
         private static readonly Dictionary<string, float> EnemyDamage = new Dictionary<string, float>() {
             {"Villager", 1f},
-            {"Knight", 2f}
+            {"Peasant", 2f},
+            {"Soldier", 0.2f},
+            {"Knight", 5f}
         };
     
         private static readonly Dictionary<string, float> AllyDamage = new Dictionary<string, float>() {
-            {"Beetle", 1f}
+            {"Hand", 0.5f},
+            {"Mummy", 5f},
+            {"Zombie", 2f}
         };
         private static Dictionary<string, float> _weaponDamage = new Dictionary<string, float>() {
             {"Note", 0.5f},
-            {"Guitar", 1f}
+            {"Guitar", 3f}
         };
         
         public static float GetDamageForEnemy(string enemyTag)

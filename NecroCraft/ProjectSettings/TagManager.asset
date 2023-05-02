@@ -15,6 +15,9 @@ TagManager:
   - Collectibles
   - Peasant
   - Soldier
+  - Hand
+  - Zombie
+  - Mummy
   layers:
   - Default
   - TransparentFX

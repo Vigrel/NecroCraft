@@ -37,7 +37,7 @@ namespace PlayerScripts
                 _startingXpBarPosition.y
             );
             
-            if (!(Math.Abs(pctXp - 1) < 0.001)) return;
+            if (!(Math.Abs(pctXp - 1) < 0.01)) return;
             
             Time.timeScale = 0;
             upgradePanel.SetActive(true);

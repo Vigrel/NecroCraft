@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  maxHp: 200
+  maxHp: 100
   damageTimer: 0.1
   xp: 0
 --- !u!50 &6571264583867543706

@@ -20,6 +20,7 @@ namespace PlayerScripts
         [SerializeField] public float maxHp;
         [SerializeField] public float damageTimer = 0.1f;
         [SerializeField] public int xp = 1;
+        [SerializeField] public int maxXp = 4;
 
         private Animator _animator;
         private float _currentHp;
@@ -91,9 +92,12 @@ namespace PlayerScripts
         {
             if (!other.gameObject.CompareTag("Collectibles")) return;
             xp++;
-            OnXpChanged?.Invoke(xp/10f);
+            
+            OnXpChanged?.Invoke((float) xp/maxXp);
             Destroy(other.gameObject, 0f);
-            if(xp == 10){
+            if(xp == maxXp)
+            {
+                maxXp = (int) (maxXp * 1.5f);
                 xp = 0;
             }
         }

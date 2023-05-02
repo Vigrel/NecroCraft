@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject endPanel;
     [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject player;
 
     void Start()
     {
@@ -20,27 +21,18 @@ public class UIManager : MonoBehaviour
     {
         if (PlayerController.Instance.GetCurrentHp() <= 0f){
             endPanel.SetActive(true);
-            Time.timeScale = 0;
+            Destroy(player);
         }
     }
 
     public void RestartGame()
     {
-        GameObject[] objectsToDeactivate = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in objectsToDeactivate)
-        {
-            obj.SetActive(false);
-        }
         SceneManager.LoadScene(0);
-        foreach (GameObject obj in objectsToDeactivate)
-        {
-            obj.SetActive(true);
-        }
     }
 
     public void StartGame()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         startPanel.SetActive(false);
     }
 
